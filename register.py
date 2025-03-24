@@ -10,7 +10,6 @@ firebase = firebase.FirebaseApplication(
 )
 
 # ฟังก์ชันดึงข้อมูลจาก Firebase และแปลงเป็น DataFrame
-@st.cache_data
 def fetch_data():
     result_pass = firebase.get('/Pass/MAC ID', None)
     result_ng = firebase.get('/NG/MAC ID', None)

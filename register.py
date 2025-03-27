@@ -72,7 +72,7 @@ if right.button("ลงทะเบียน"):
     st.session_state.status = False
 # ถ้า status เป็น True ให้แสดง UI การเลือก MAC ID
 if st.session_state.status and not st.session_state.status2:
-
+    st.title("ดูผลทดสอบ MIC-Smart")
     # สร้าง Selectbox ที่ดึงค่าจากฐานข้อมูล
     mac_list = df["ID"].tolist()  # ดึง MAC ID ทั้งหมดจากฐานข้อมูล
     selected_mac = st.selectbox("เลือก MAC ID:", [""] + mac_list, index=None)  # เพิ่มค่าว่างให้เลือก
@@ -81,6 +81,7 @@ if st.session_state.status and not st.session_state.status2:
     if selected_mac:
         search(selected_mac)
 if st.session_state.status2 and not st.session_state.status:
+    st.title("ลงทะเบียนใช้งาน MIC-Smart")
     mac_list = df["ID"].tolist()  # ดึง MAC ID ทั้งหมดจากฐานข้อมูล
     selected_mac = st.selectbox("เลือก MAC ID:", [""] + mac_list, index=None)
 

@@ -63,7 +63,7 @@ if 'status2' not in st.session_state:
 
 left, right = st.columns(2)
 # สร้างปุ่ม "ผลเทส" และสลับค่า status เมื่อกดปุ่ม
-if left.button("ผลเทส"):
+if left.button("ผลทดสอบ"):
     st.session_state.status = not st.session_state.status  # Toggle ค่าระหว่าง True/False
     st.session_state.status2 = False
 
@@ -79,6 +79,20 @@ if st.session_state.status and not st.session_state.status2:
 
     # ถ้าผู้ใช้เลือก MAC ID ให้แสดงข้อมูล
     if selected_mac:
+        result_pass = firebase.get('/Pass/MAC ID', None)
+        result_ng = firebase.get('/NG/MAC ID', None)
+
+        # ตรวจสอบว่า MAC ID อยู่ใน Pass หรือ NG
+        if selected_mac in result_pass:
+            mac_source = "Pass"
+        elif selected_mac in result_ng:
+            mac_source = "NG"
+        else:
+            mac_source = "Unknown"
+        color = "green" if mac_source == "Pass" else "red"
+
+        st.markdown(f'<p style="font-size:24px;">Result judge : <b style="font-size:24px; color:{color};">{mac_source}</b></p>', unsafe_allow_html=True)
+
         search(selected_mac)
 if st.session_state.status2 and not st.session_state.status:
     st.title("ลงทะเบียนใช้งาน MIC-Smart")

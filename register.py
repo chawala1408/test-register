@@ -120,6 +120,7 @@ if st.session_state.status2 and not st.session_state.status:
                             firebase.put(f'/Pass/MAC ID/{selected_mac}','Localtion' ,custom_location)
                             current_date = datetime.now().strftime("%d/%m/%y")
                             firebase.put(f'/Pass/MAC ID/{selected_mac}','date_regis' ,current_date)
+                            st.toast('เสร็จสิ้นการลงทะเบียน!', icon='✅')
             elif selected_local:
                 if not (regis_date  == "" or regis_date is None):
                     st.warning(f"MAC ID `{selected_mac}` ได้รับการลงทะเบียนใช้งานแล้ว โดย {local_date_str}.\n\nหากท่านต้องการทำการแก้ไขข้อมูล กรุณาติดต่อ MIC Division")
@@ -128,5 +129,6 @@ if st.session_state.status2 and not st.session_state.status:
                         firebase.put(f'/Pass/MAC ID/{selected_mac}','Localtion' ,selected_local)
                         current_date = datetime.now().strftime("%d/%m/%y")
                         firebase.put(f'/Pass/MAC ID/{selected_mac}','date_regis' ,current_date)
+                        st.toast('เสร็จสิ้นการลงทะเบียน!', icon='✅')
         else:
             st.write("ไม่พบข้อมูล Location")
